@@ -21,4 +21,4 @@ ENV DOWNLOAD_DIR=/srv/music/.rips \
     MUSIC_LIBRARY_DIR=/home/debian/navi/music
 
 # stdio transport — the MCP client connects to this process's stdin/stdout.
-ENTRYPOINT ["bun", "run", "src/mcp/index.ts"]
+ENTRYPOINT ["bun", "run", "src/index.ts"]
