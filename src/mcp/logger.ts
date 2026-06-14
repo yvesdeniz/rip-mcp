@@ -1,12 +1,3 @@
-/**
- * stderr logger for the MCP server.
- *
- * IMPORTANT: an MCP server speaks JSON-RPC over **stdout**. Writing anything
- * else to stdout corrupts the protocol stream, so every diagnostic here goes to
- * stderr instead. (The Discord bot's `lib/logger.ts` logs to stdout, which is
- * why we don't reuse it.)
- */
-
 const COLORS = {
   reset: '\x1b[0m',
   dim: '\x1b[2m',

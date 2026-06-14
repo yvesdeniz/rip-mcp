@@ -1,8 +1,3 @@
-/**
- * MCP server definition: registers the three music tools and routes them to the
- * configured backend + local storage.
- */
-
 import { mkdir } from 'node:fs/promises';
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -27,7 +22,6 @@ function makeBackend(config: McpConfig): MusicBackend {
   }
 }
 
-/** Wrap a handler so thrown errors become a clean MCP error result. */
 function toolResult(text: string, isError = false) {
   return { content: [{ type: 'text' as const, text }], isError };
 }

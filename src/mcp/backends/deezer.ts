@@ -1,9 +1,3 @@
-/**
- * Native Deezer backend: search via the public API, then download + Blowfish-
- * decrypt the encrypted FLAC straight from Deezer's CDN using the ARL cookie.
- * This is the same flow deemix implements, ported to Bun/TypeScript.
- */
-
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 

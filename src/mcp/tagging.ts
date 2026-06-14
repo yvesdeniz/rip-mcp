@@ -1,13 +1,3 @@
-/**
- * Best-effort metadata + cover-art embedding.
- *
- * The download itself produces a valid, playable file; tagging is a polish step.
- * We prefer `ffmpeg` (handles FLAC and MP3, including embedded cover art) and
- * fall back to `metaflac` for FLAC. If neither binary is present — unlikely on a
- * machine that runs a music server — we log a warning and leave the file
- * untagged rather than failing the rip.
- */
-
 import { rename } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -19,7 +9,6 @@ export interface TagInput {
   /** 'flac' | 'mp3' */
   ext: string;
   metadata: TrackMetadata;
-  /** Local path to a cover image, if one was downloaded. */
   coverPath?: string;
 }
 

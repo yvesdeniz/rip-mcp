@@ -1,12 +1,3 @@
-/**
- * Thin client for Deezer's private "gw-light" gateway plus the public REST API.
- *
- * - The **gateway** (authenticated with the ARL cookie) yields the per-track
- *   download token, media version and a signed CDN url for the encrypted FLAC.
- * - The **public API** (no auth) is used for search and for rich tagging
- *   metadata (album artist, cover art, release year, genre, ISRC).
- */
-
 import type { Quality } from '../config';
 import type { McpLogger } from '../logger';
 
@@ -26,7 +17,6 @@ export interface DeezerSearchTrack {
   url: string;
 }
 
-/** Display/tagging metadata sourced from the public API. */
 export interface TrackMetadata {
   id: string;
   title: string;
@@ -42,10 +32,8 @@ export interface TrackMetadata {
   coverUrl: string | undefined;
 }
 
-/** Result of resolving a downloadable stream from the gateway. */
 export interface StreamSource {
   url: string;
-  /** The format actually granted (may be a fallback below the request). */
   format: Quality;
   trackToken: string;
 }
@@ -73,7 +61,6 @@ export class DeezerGateway {
     private readonly log: McpLogger,
   ) {}
 
-  /** Authenticate the ARL and cache the CSRF/license tokens + session cookie. */
   private async ensureSession(): Promise<void> {
     if (this.ready) return;
 
@@ -130,7 +117,6 @@ export class DeezerGateway {
     return payload;
   }
 
-  /** Fetch the track token + media version needed to request a stream. */
   private async getSongToken(trackId: string): Promise<{ trackToken: string }> {
     const res = await this.callGateway<{ TRACK_TOKEN: string }>(
       'song.getData',
@@ -143,11 +129,6 @@ export class DeezerGateway {
     return { trackToken: res.results.TRACK_TOKEN };
   }
 
-  /**
-   * Resolve a playable, encrypted CDN url for the requested quality, walking the
-   * provided fallback list until Deezer grants one (HiFi/FLAC requires the
-   * account to actually have lossless access).
-   */
   async resolveStream(trackId: string, qualities: Quality[]): Promise<StreamSource> {
     await this.ensureSession();
     const { trackToken } = await this.getSongToken(trackId);
@@ -186,7 +167,6 @@ export class DeezerGateway {
     return { url, format: media.format, trackToken };
   }
 
-  // ---- Public API (unauthenticated) ----------------------------------------
 
   async search(query: string, limit: number): Promise<DeezerSearchTrack[]> {
     const url = `${PUBLIC_API}/search/track?q=${encodeURIComponent(query)}&limit=${limit}`;
@@ -233,7 +213,6 @@ export class DeezerGateway {
     };
     if (track.error) throw new Error(`track metadata error: ${track.error.message}`);
 
-    // Album lookup enriches the tags (album artist, genre, total tracks, year).
     let albumArtist = track.artist.name;
     let genre: string | undefined;
     let trackTotal = 0;

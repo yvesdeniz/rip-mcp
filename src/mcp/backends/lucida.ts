@@ -1,20 +1,3 @@
-/**
- * Lucida-flow backend.
- *
- * This targets a *self-hosted* lucida-flow instance rather than the public
- * lucida.to site. Because lucida deployments expose slightly different routes,
- * the endpoints below are intentionally simple and overridable via env. The
- * expected contract is:
- *
- *   POST {LUCIDA_API_URL}/api/fetch
- *        body:  { "url": <track url>, "format": "flac"|"mp3" }
- *        auth:  Authorization: Bearer {LUCIDA_API_KEY}   (optional)
- *        resp:  the audio file as an octet-stream (already decrypted/tagged)
- *
- * Search + tagging metadata still come from Deezer's public API, which needs no
- * auth and gives consistent results.
- */
-
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 

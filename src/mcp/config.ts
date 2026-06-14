@@ -1,12 +1,3 @@
-/**
- * Environment-driven configuration for the music-ripping MCP server.
- *
- * Everything the server needs (Deezer ARL, the local music library path, quality
- * preferences, optional Lucida endpoint) is read from `process.env` so the
- * server can be dropped onto the box that runs music.saintdeniz.dev and wired up
- * purely through `.env`.
- */
-
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 
@@ -14,7 +5,6 @@ export type Quality = 'FLAC' | 'MP3_320' | 'MP3_128';
 export type Backend = 'deezer' | 'lucida';
 export type UploadMode = 'move' | 'copy';
 
-/** Deezer's internal format identifiers, ordered by preference per quality. */
 export const QUALITY_FALLBACK: Record<Quality, Quality[]> = {
   FLAC: ['FLAC', 'MP3_320', 'MP3_128'],
   MP3_320: ['MP3_320', 'MP3_128'],
@@ -39,18 +29,12 @@ function pick<T extends string>(value: string | undefined, allowed: readonly T[]
 
 export interface McpConfig {
   backend: Backend;
-  /** Deezer ARL cookie. Required for the native `deezer` backend. */
   arl: string;
   quality: Quality;
-  /** Working directory where files are decrypted/tagged before upload. */
   downloadDir: string;
-  /** Final destination library on the local server (the "private server"). */
   libraryDir: string;
-  /** Whether `upload` moves the file or leaves a copy behind in downloadDir. */
   uploadMode: UploadMode;
-  /** Embed cover art + tags when a tagging backend (ffmpeg/metaflac) exists. */
   embedTags: boolean;
-  /** Lucida-flow base URL + key, used when `backend === 'lucida'`. */
   lucida: { baseUrl: string; apiKey: string | undefined };
 }
 
