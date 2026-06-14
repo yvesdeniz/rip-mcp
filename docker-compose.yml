@@ -12,4 +12,4 @@ services:
     stdin_open: true   # keep STDIN open for the JSON-RPC stream
     tty: false         # never allocate a TTY — it corrupts the protocol
     volumes:
-      - /srv/music:/srv/music
+      - /home/debian/navi/music:/srv/music
