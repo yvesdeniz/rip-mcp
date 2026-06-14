@@ -1,0 +1,15 @@
+# Run on demand from your MCP client, NOT with `up`:
+#   docker compose -f docker-compose.mcp.yml run --rm shd-music-mcp
+# `up` would start the container with no client attached to stdio and it'd idle.
+services:
+  shd-music-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    image: ghcr.io/yvesdeniz/curse-mcp:latest
+    container_name: shd-music-mcp
+    env_file: .env
+    stdin_open: true   # keep STDIN open for the JSON-RPC stream
+    tty: false         # never allocate a TTY — it corrupts the protocol
+    volumes:
+      - /srv/music:/srv/music
