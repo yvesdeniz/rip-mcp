@@ -3,13 +3,6 @@ export interface ParsedTrack {
   raw: string;
 }
 
-/**
- * Accepts:
- *   - https://www.deezer.com/track/123 / https://deezer.com/en/track/123
- *   - deezer:track:123
- *   - a Lucida-style wrapper:  https://lucida.to/?url=<deezer url>&...
- *   - a bare numeric id
- */
 export function parseTrack(input: string): ParsedTrack {
   const value = input.trim();
 
