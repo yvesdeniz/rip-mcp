@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ghcr.io/yvesdeniz/curse-mcp:latest
+    image: ghcr.io/yvesdeniz/rip-mcp:latest
     container_name: shd-music-mcp
     env_file: .env
     stdin_open: true   # keep STDIN open for the JSON-RPC stream
