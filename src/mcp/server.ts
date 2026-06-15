@@ -77,9 +77,13 @@ export function buildServer(): McpServer {
           .boolean()
           .optional()
           .describe('Move the finished file into the music library (default true)'),
+        flat: z
+          .boolean()
+          .optional()
+          .describe('Publish into the library root instead of Album Artist/Album/ subfolders (default false)'),
       },
     },
-    async ({ track_url, upload }) => {
+    async ({ track_url, upload, flat }) => {
       try {
         await mkdir(config.downloadDir, { recursive: true });
         const rip = await backend.rip(track_url, config.downloadDir);
@@ -94,6 +98,7 @@ export function buildServer(): McpServer {
             extOf(rip.localPath),
             config,
             log,
+            flat ?? false,
           );
           return toolResult(
             `Ripped ${rip.format} (${sizeMb} MB): ${summary}\n` +

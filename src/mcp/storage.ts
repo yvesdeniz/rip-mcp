@@ -57,8 +57,14 @@ export async function publishTrack(
   ext: string,
   config: McpConfig,
   log: McpLogger,
+  flat = false,
 ): Promise<PublishResult> {
-  const target = await uniquePath(libraryPathFor(config.libraryDir, meta, ext));
+  const foldered = libraryPathFor(config.libraryDir, meta, ext);
+  // `flat` drops the file straight in the library root, reusing just the
+  // "NN - Title.ext" leaf instead of the Album Artist/Album/ subtree.
+  const target = await uniquePath(
+    flat ? join(config.libraryDir, basename(foldered)) : foldered,
+  );
   return place(localPath, target, config, log);
 }
 
