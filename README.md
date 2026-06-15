@@ -86,4 +86,4 @@ commit it.
 
 ## Preview/Demo
 
-![](https://github.com/yvesdeniz/rip-mcp/raw/master/src/mcp/assets/preview.mp4)
+[Demo](https://raw.githubusercontent.com/yvesdeniz/rip-mcp/master/src/mcp/assets/preview.mp4)
