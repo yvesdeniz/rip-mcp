@@ -13,6 +13,7 @@ RUN apk add --no-cache ffmpeg flac
 COPY package.json bun.lock tsconfig.json ./
 RUN bun install --frozen-lockfile
 
+COPY index.ts ./
 COPY src ./src
 
 # Keep the working dir on the same volume as the library so `move` publishes
@@ -21,4 +22,4 @@ ENV DOWNLOAD_DIR=/srv/music/.rips \
     MUSIC_LIBRARY_DIR=/srv/music
 
 # stdio transport — the MCP client connects to this process's stdin/stdout.
-ENTRYPOINT ["bun", "run", "src/mcp/index.ts"]
+ENTRYPOINT ["bun", "run", "index.ts"]
