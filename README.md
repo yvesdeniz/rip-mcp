@@ -1,4 +1,4 @@
-# rip-mcp — MCP server
+# rip mcp server
 
 A Model Context Protocol server (JSON-RPC over stdio, built for Bun) that rips
 high-quality audio from Deezer using an ARL cookie and publishes the finished
@@ -9,7 +9,7 @@ Recommended to use this with [Poke](https://poke.com)
 Use lucida to rip from soundcloud, rest you can rip using deezer as it has most if not all of the released music.
 
 Because the server runs on the same host as the music site, "upload" is just a
-local move/copy into the library directory — no SSH/SFTP/S3 required.
+local move/copy into the library directory no SSH/SFTP/S3 required.
 
 ## Tools
 
@@ -25,7 +25,7 @@ local move/copy into the library directory — no SSH/SFTP/S3 required.
 2. **rip_track** authenticates the ARL against the private `gw-light` gateway,
    requests a stream token, and asks `media.deezer.com` for an encrypted CDN URL
    (FLAC with automatic fallback to MP3 320/128).
-3. The encrypted payload is decrypted with the `BF_CBC_STRIPE` scheme — every
+3. The encrypted payload is decrypted with the `BF_CBC_STRIPE` scheme every
    third 2048-byte block is Blowfish-CBC encrypted. We decrypt natively via
    Bun's `node:crypto` `bf-cbc` cipher (`src/mcp/deezer/crypto.ts`).
 4. Tags + cover art are embedded best-effort with **ffmpeg** (preferred) or
@@ -83,3 +83,7 @@ Register it with an MCP client:
 Use this only with your own Deezer account/ARL and for content you're entitled
 to download. The ARL is a credential — keep it in `.env` (git-ignored), never
 commit it.
+
+## Preview/Demo
+<video src="https://github.com/yvesdeniz/rip-mcp/raw/master/src/mcp/assets/preview.mp4" controls="controls" style="max-width: 100%;"></video>
+
