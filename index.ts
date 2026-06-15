@@ -14,6 +14,8 @@
 
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
+import { loadConfig } from './src/mcp/config';
+import { startHttpServer } from './src/mcp/http';
 import { buildServer } from './src/mcp/server';
 import { createLogger } from './src/mcp/logger';
 
@@ -21,6 +23,13 @@ import { createLogger } from './src/mcp/logger';
 const log = createLogger('mcp');
 
 async function main(): Promise<void> {
+  const config = loadConfig();
+
+  if (config.transport === 'http') {
+    await startHttpServer(() => buildServer(), config, log);
+    return;
+  }
+
   const server = buildServer();
   const transport = new StdioServerTransport();
   await server.connect(transport);
