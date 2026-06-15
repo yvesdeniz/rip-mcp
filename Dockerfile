@@ -13,6 +13,7 @@ RUN apk add --no-cache ffmpeg flac
 COPY package.json bun.lock tsconfig.json ./
 RUN bun install --frozen-lockfile
 
+COPY index.ts ./
 COPY src ./src
 
 # Keep the working dir on the same volume as the library so `move` publishes
