@@ -85,5 +85,6 @@ to download. The ARL is a credential — keep it in `.env` (git-ignored), never
 commit it.
 
 ## Preview/Demo
-<video src="https://github.com/yvesdeniz/rip-mcp/raw/master/src/mcp/assets/preview.mp4" controls="controls" style="max-width: 100%;"></video>
+
+<video src="src/mcp/assets/preview.mp4" controls="controls" style="max-width: 100%;"></video>
 
