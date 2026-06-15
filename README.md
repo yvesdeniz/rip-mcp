@@ -1,4 +1,4 @@
-# shd-music — MCP server
+# rip-mcp — MCP server
 
 A Model Context Protocol server (JSON-RPC over stdio, built for Bun) that rips
 high-quality audio from Deezer using an ARL cookie and publishes the finished
@@ -65,7 +65,7 @@ Register it with an MCP client:
 ```json
 {
   "mcpServers": {
-    "shd-music": {
+    "rip-music": {
       "command": "bun",
       "args": ["run", "src/mcp/index.ts"],
       "cwd": "/path/to/where/you/cloned"
