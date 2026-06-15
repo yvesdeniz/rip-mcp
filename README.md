@@ -86,4 +86,4 @@ commit it.
 
 ## Preview/Demo
 
-[Demo](https://raw.githubusercontent.com/yvesdeniz/rip-mcp/master/src/mcp/assets/preview.mp4)
+https://github.com/user-attachments/assets/df363e87-2d62-4d06-ac3b-353ceccd2e6a
