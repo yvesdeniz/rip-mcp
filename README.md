@@ -86,4 +86,4 @@ commit it.
 
 ## Preview/Demo
 
-<video src="./src/mcp/assets/preview.mp4" controls width="100%"></video>
+<video src="https://raw.githubusercontent.com/yvesdeniz/rip-mcp/master/src/mcp/assets/preview.mp4" controls width="100%"></video>
