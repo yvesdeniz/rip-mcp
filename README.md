@@ -86,4 +86,4 @@ commit it.
 
 ## Preview/Demo
 
-![video](./src/mcp/assets/preview.mp4)
+<video src="./src/mcp/assets/preview.mp4" controls width="100%"></video>
