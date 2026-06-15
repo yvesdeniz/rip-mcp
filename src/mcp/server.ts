@@ -98,7 +98,7 @@ export function buildServer(): McpServer {
             extOf(rip.localPath),
             config,
             log,
-            flat ?? false,
+            flat ?? true,
           );
           return toolResult(
             `Ripped ${rip.format} (${sizeMb} MB): ${summary}\n` +
