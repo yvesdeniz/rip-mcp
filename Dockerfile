@@ -19,7 +19,7 @@ COPY src ./src
 # Keep the working dir on the same volume as the library so `move` publishes
 # don't fall back to a cross-filesystem copy.
 ENV DOWNLOAD_DIR=/srv/music/.rips \
-    MUSIC_LIBRARY_DIR=/home/debian/navi/music
+    MUSIC_LIBRARY_DIR=/srv/music
 
 # Streamable-HTTP transport listens here when MCP_TRANSPORT=http (default 4040).
 EXPOSE 4040
