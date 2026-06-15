@@ -19,7 +19,7 @@ COPY src ./src
 # Keep the working dir on the same volume as the library so `move` publishes
 # don't fall back to a cross-filesystem copy.
 ENV DOWNLOAD_DIR=/srv/music/.rips \
-    MUSIC_LIBRARY_DIR=/srv/music
+    MUSIC_LIBRARY_DIR=/home/debian/navi/music
 
 # stdio transport — the MCP client connects to this process's stdin/stdout.
 ENTRYPOINT ["bun", "run", "index.ts"]
