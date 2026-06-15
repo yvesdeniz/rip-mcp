@@ -21,5 +21,8 @@ COPY src ./src
 ENV DOWNLOAD_DIR=/srv/music/.rips \
     MUSIC_LIBRARY_DIR=/home/debian/navi/music
 
-# stdio transport — the MCP client connects to this process's stdin/stdout.
+# Streamable-HTTP transport listens here when MCP_TRANSPORT=http (default 4040).
+EXPOSE 4040
+
+# Default stdio transport; set MCP_TRANSPORT=http to expose the HTTP endpoint.
 ENTRYPOINT ["bun", "run", "index.ts"]

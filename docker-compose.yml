@@ -1,6 +1,7 @@
-# Run on demand from your MCP client, NOT with `up`:
-#   docker compose -f docker-compose.mcp.yml run --rm shd-music-mcp
-# `up` would start the container with no client attached to stdio and it'd idle.
+# HTTP transport (MCP_TRANSPORT=http) is a long-lived service — run it with:
+#   docker compose up -d --build
+# For the stdio transport instead, drop the port mapping and launch per client:
+#   docker compose run --rm shd-music-mcp
 services:
   shd-music-mcp:
     build:
@@ -9,7 +10,13 @@ services:
     image: ghcr.io/yvesdeniz/rip-mcp:latest
     container_name: shd-music-mcp
     env_file: .env
-    stdin_open: true   # keep STDIN open for the JSON-RPC stream
+    restart: unless-stopped
+    stdin_open: true   # keep STDIN open for the stdio JSON-RPC stream
     tty: false         # never allocate a TTY — it corrupts the protocol
+    # Publish the HTTP endpoint on the host loopback for nginx to proxy.
+    # The app must bind 0.0.0.0 inside the container, so set MCP_HTTP_HOST=0.0.0.0
+    # (and a matching MCP_HTTP_PORT) in .env.
+    ports:
+      - "127.0.0.1:4040:4040"
     volumes:
       - /home/debian/navi/music:/srv/music
